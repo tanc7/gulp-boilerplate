@@ -36,16 +36,16 @@ gulp.task('html', ['images'], function () {
   var
     out = folder.build;
   return gulp.src(folder.src + '**/*.html')
-    // .pipe(newer(out))
+    .pipe(newer(out))
     .pipe(htmlmin({
       removeComments: true,
       collapseWhitespace: true,
-      // collapseBooleanAttributes: true,
-      // removeAttributeQuotes: true,
-      // removeRedundantAttributes: true,
-      // removeEmptyAttributes: true,
-      // removeScriptTypeAttributes: true,
-      // removeStyleLinkTypeAttributes: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeRedundantAttributes: true,
+      removeEmptyAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
       // removeOptionalTags: true
     }))
     .pipe(gulp.dest(out));
@@ -57,6 +57,7 @@ gulp.task('css', ['sass'], function () {
     plugins = [autoprefixer];
 
   return gulp.src(folder.src + 'css/**/*.css')
+    .pipe(newer(out))
     .pipe(sourcemaps.init())
     .pipe(cssnano())
     .pipe(postcss(plugins))
@@ -68,6 +69,7 @@ gulp.task('sass', function () {
   var
     out = folder.src + 'css/';
   return gulp.src(folder.src + 'scss/**/*.scss')
+    .pipe(newer(out))
     .pipe(sass()) // Converts Sass to CSS with gulp-sass
     .pipe(gulp.dest(out))
 });
@@ -77,6 +79,7 @@ gulp.task('js', function () {
   var
     out = folder.build + 'js/';
   return gulp.src(folder.src + 'js/**/*.js')
+    .pipe(newer(out))
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
