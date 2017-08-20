@@ -14,10 +14,7 @@ var
   del = require('del'),
   sass = require('gulp-sass'),
   browserSync = require('browser-sync').create(),
-  // pump = require('pump'),
-  // cssnext = require('postcss-cssnext'),
-  // development mode
-  // devBuild = (process.env.NODE_ENV !== 'production'),
+
   // folders
   reload = browserSync.reload,
   folder = {
@@ -34,13 +31,6 @@ gulp.task('images', function () {
     .pipe(gulp.dest(out));
 });
 
-// HTML processing
-// gulp.task('minify', function() {
-//   var out = folder.build;
-//   return gulp.src(folder.src + 'src/*.html')
-//     .pipe(htmlmin({collapseWhitespace: true}))
-//     .pipe(gulp.dest('dist'));
-// });
 
 gulp.task('html', ['images'], function () {
   var
@@ -138,7 +128,3 @@ gulp.task('clean', function () {
     out = folder.build;
   return del([out + '*'], { dot: true });
 });
-  // sass = require('gulp-sass');
-
-
-
